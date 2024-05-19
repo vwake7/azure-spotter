@@ -43,4 +43,4 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE](https:
 
 # Acknowledgments
 * [stackql](https://stackql.io/) is the IAC tool, this has helped to simplify the code to a great extent
-* This project is an inspiration from [AutoSpotting](https://github.com/LeanerCloud/AutoSpotting)
+* This project is inspired by [AutoSpotting](https://github.com/LeanerCloud/AutoSpotting)
