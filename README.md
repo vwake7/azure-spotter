@@ -5,11 +5,10 @@ Convert On Demand VMs to Spot VMs in Azure Virtual Machine Scalesets
 3. CONVERT_TO_SPOT variable can accept three values
    a. ALL - This will convert all Virtual Machine Scaleset regardless of its tag 
    b. TRUE - This will convert only Virtual Machine Scalesets with tag - convert_to_spot = True
-   c. FALSE - This will convert all Virtual Machine Scalesets without tag - convert_to_spot = False
-4. [stackql](https://stackql.io/) is used to communicate with Azure for both Read and Write operations
-5. This program is scheduled to check every hour for VM Scalesets that has OD VMs and convert them to Spot VM
+   c. FALSE - Virtual Machine Scalesets with tag convert_to_spot = False will be skipped, everything else will be converted
+4. This program is scheduled to run every hour 
 
-# Steps to execute in Docker
+# Getting started using Docker
 ## 1. Clone the repo 
 `git clone https://github.com/vwake7/azure-spotter`
       
@@ -32,3 +31,16 @@ sudo docker run -d --name azurespot-local \
 -e CONVERT_TO_SPOT="ALL" \
 azurespot-local-image
 ```
+
+# Contributing
+Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
+
+# Versioning
+We use SemVer for versioning. For the versions available, see the tags on this repository.
+
+# License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+# Acknowledgments
+* [stackql](https://stackql.io/) is the IAC tool, this has helped to simplify the code to a great extent
+* This project is an inspiration from [AutoSpotting](https://github.com/LeanerCloud/AutoSpotting)
