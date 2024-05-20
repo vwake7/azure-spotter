@@ -42,5 +42,5 @@ We use [SemVer](https://semver.org/) for versioning. For the versions available,
 This project is licensed under the Apache-2.0 License - see the [LICENSE](https://github.com/vwake7/azure-spotter/blob/main/LICENSE) file for details.
 
 # Acknowledgments
-* [stackql](https://stackql.io/) is the IAC tool, this has helped to simplify the code to a great extent
+* This project is build with [stackql](https://stackql.io/) as the IAC tool and this has helped to simplify the code to a great extent
 * This project is inspired by [AutoSpotting](https://github.com/LeanerCloud/AutoSpotting)
