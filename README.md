@@ -17,10 +17,10 @@ Convert OnDemand VMs to Spot VMs in Azure Virtual Machine Scalesets
 `cd azure-spotter`
 
 ### 3. Build the Docker image
- docker build -t azurespot-local-image .`
+`docker build -t azurespot-local-image .`
 
 ### 4. If you have another container running with the same name, delete it
- docker rm --force azurespot-local`
+`docker rm --force azurespot-local`
 
 ### 5. Run your docker image
 ```
