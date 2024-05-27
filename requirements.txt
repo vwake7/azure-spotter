@@ -1,0 +1,4 @@
+pandas==2.2.0
+ipython==8.21.0
+pystackql==3.6.2
+schedule==1.2.1
