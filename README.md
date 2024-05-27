@@ -2,12 +2,16 @@
 Convert OnDemand VMs to Spot VMs in Azure Virtual Machine Scalesets
 1. Covers all Virtual Machine Scalesets within a Subscription, but that can be controlled with environment variable - CONVERT_TO_SPOT and tags 
 2. For each VMSS, converts all OD VMs to Spot VMs except one OD VM
-3. Azure credentials needs to be provided as environment variables
-4. CONVERT_TO_SPOT variable can accept three values
+3. Identifies a OD VM that can be replaced
+4. Copies properties for all dependencies - Network Interface, VM, Health Extension and creates a new Spot VM of the same type
+5. Then the OD VM is deleted
+6. If it can't find the same VM type, it will roll back all changes 
+7. Azure credentials need to be provided as environment variables
+8. CONVERT_TO_SPOT variable can accept three values
    * ALL - This will convert all Virtual Machine Scaleset regardless of its tag 
    * TRUE - This will convert only Virtual Machine Scalesets with tag - convert_to_spot = True
    * FALSE - Virtual Machine Scalesets with tag convert_to_spot = False will be skipped, everything else will be converted
-5. This task is scheduled to run every hour at the first minute
+9. This task is scheduled to run every hour at the first minute for eg. 9:01, 10:01 and so on
 
 ## Getting started using Docker
 ### 1. Clone the repo 
