@@ -1,6 +1,6 @@
 ## Azure spotter
 Convert OnDemand VMs to Spot VMs in Azure Virtual Machine Scalesets
-1. Covers all Virtual Machine Scalesets within a Subscription, but that can be controlled with environment variable - CONVERT_TO_SPOT
+1. Covers all Virtual Machine Scalesets within a Subscription, but that can be controlled with environment variable - CONVERT_TO_SPOT and tags 
 2. For each VMSS, converts all OD VMs to Spot VMs except one OD VM
 3. Azure credentials needs to be provided as environment variables
 4. CONVERT_TO_SPOT variable can accept three values
