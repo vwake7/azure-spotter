@@ -15,8 +15,8 @@ Convert OnDemand VMs to Spot VMs in Azure Virtual Machine Scalesets
 
 ## Getting started using Docker
 ### 1. Clone the repo 
-```git clone https://github.com/vwake7/azure-spotter
-
+```
+git clone https://github.com/vwake7/azure-spotter
 ```
       
 ### 2. Traverse to the azure-spotter directory
