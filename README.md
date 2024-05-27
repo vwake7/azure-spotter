@@ -20,13 +20,19 @@ git clone https://github.com/vwake7/azure-spotter
 ```
       
 ### 2. Traverse to the azure-spotter directory
-`cd azure-spotter`
+```
+cd azure-spotter
+```
 
 ### 3. Build the Docker image
-`docker build -t azurespot-local-image .`
+```
+docker build -t azurespot-local-image .
+```
 
 ### 4. If you have another container running with the same name, delete it
-`docker rm --force azurespot-local`
+```
+docker rm --force azurespot-local
+```
 
 ### 5. Run your docker image
 ```
