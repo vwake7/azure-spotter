@@ -1,8 +1,8 @@
 from pystackql import StackQL
 import os, time, schedule
 
-def Create_nic():
-  # Insert into Network Interfaces
+def create_nic():
+  """Insert into Network Interfaces."""
   query = """
   Insert into azure.network.interfaces
   (
@@ -53,17 +53,17 @@ def Create_nic():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {vm['nic_name']}: {e}")
+    print(f"Error in create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {vm['nic_name']}: {e}")
   else:
-    if res['message'] == Success_message:
-      global Create_nic_ind
-      Create_nic_ind = True
+    if res['message'] == success_message:
+      global create_nic_ind
+      create_nic_ind = True
       print(res)
     else:
-      print(f"Error in Create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {vm['nic_name']}: {res}")
+      print(f"Error in create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {vm['nic_name']}: {res}")
 
-def Undo_create_nic():
-  # Delete Network Interfaces
+def undo_create_nic():
+  """Delete Network Interfaces."""
   query = """
   Delete from azure.network.interfaces
   where subscriptionId = '%s'
@@ -73,16 +73,16 @@ def Undo_create_nic():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Undo_create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {e}")
+    print(f"Error in undo_create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {e}")
   else:
-    if res['message'] == Success_message:
+    if res['message'] == success_message:
       print(res)
     else:
-      print(f"Error in Undo_create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {res}")
+      print(f"Error in undo_create_nic for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {res}")
 
 
-def Create_nic_dep():
-  # Check if nic is deployed
+def create_nic_dep():
+  """Check if nic is deployed."""
   query = """
   select name
     from azure.network.interfaces
@@ -93,17 +93,17 @@ def Create_nic_dep():
   try:
     res = stackql.execute(query)
   except Exception as e:
-    print(f"Error in Create_nic_dep for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {e}")
+    print(f"Error in create_nic_dep for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {e}")
   else:
     if nic_name == res[0]['name']:
-      global Create_nic_deployed
-      Create_nic_deployed = True
+      global create_nic_deployed
+      create_nic_deployed = True
       print(res)
     else:
-      print(f"Error in Create_nic_dep for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {res}")
+      print(f"Error in create_nic_dep for subscription_id = {subscription_id}, rg = {rg_name}, networkInterfaceName = {nic_name}: {res}")
 
-def Create_spot_vm():
-# Insert into Virtual Machines
+def create_spot_vm():
+  """Insert into Virtual Machines."""
   query = """
   Insert into azure.compute.virtual_machines
     (
@@ -152,17 +152,17 @@ def Create_spot_vm():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
+    print(f"Error in create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
   else:
-    if res['message'] == Success_message:
-      global Create_spot_vm_ind
-      Create_spot_vm_ind = True
+    if res['message'] == success_message:
+      global create_spot_vm_ind
+      create_spot_vm_ind = True
       print(res)
     else:
-      print(f"Error in Create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
+      print(f"Error in create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
 
-def Undo_create_spot_vm():
-# Delete Virtual Machines
+def undo_create_spot_vm():
+  """Delete Virtual Machines."""
   query = """
   Delete from azure.compute.virtual_machines
   where subscriptionId = '%s'
@@ -172,15 +172,15 @@ def Undo_create_spot_vm():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Undo_create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
+    print(f"Error in undo_create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
   else:
-    if res['message'] == Success_message:
+    if res['message'] == success_message:
       print(res)
     else:
-      print(f"Error in Create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
+      print(f"Error in create_spot_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
 
-def Create_spot_vm_dep():
-  # Check if spot vm is deployed
+def create_spot_vm_dep():
+  """Check if spot vm is deployed."""
   query = """
   select name
     from azure.compute.virtual_machines
@@ -191,17 +191,17 @@ def Create_spot_vm_dep():
   try:
     res = stackql.execute(query)
   except Exception as e:
-    print(f"Error in Create_spot_vm_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
+    print(f"Error in create_spot_vm_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
   else:
     if vm_name == res[0]['name']:
-      global Create_spot_vm_deployed
-      Create_spot_vm_deployed = True
+      global create_spot_vm_deployed
+      create_spot_vm_deployed = True
       print(res)
     else:
-      print(f"Error in Create_spot_vm_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {res}")
+      print(f"Error in create_spot_vm_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {res}")
 
-def Create_vm_extension():
-# Create vm Extension
+def create_vm_extension():
+  """Create vm Extension."""
   query = """
   Insert into azure.compute.virtual_machine_extensions
   (
@@ -228,17 +228,17 @@ def Create_vm_extension():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
+    print(f"Error in create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
   else:
-    if res['message'] == Success_message:
-      global Create_vm_extension_ind
-      Create_vm_extension_ind = True
+    if res['message'] == success_message:
+      global create_vm_extension_ind
+      create_vm_extension_ind = True
       print(res)
     else:
-      print(f"Error in Create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
+      print(f"Error in create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")
 
-def Undo_create_vm_extension():
-# Delete vm Extension
+def undo_create_vm_extension():
+  """Delete vm Extension."""
   query = """
   Delete from azure.compute.virtual_machine_extensions
   where subscriptionId = '%s'
@@ -256,15 +256,15 @@ def Undo_create_vm_extension():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Undo_create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
+    print(f"Error in undo_create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
   else:
-    if res['message'] == Success_message:
+    if res['message'] == success_message:
       print(res)
     else:
-      print(f"Error in Undo_create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
+      print(f"Error in undo_create_vm_extension for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
 
-def Create_vm_extension_dep():
-# Check if vm Extension is deployed
+def create_vm_extension_dep():
+  """Check if vm Extension is deployed."""
   query = """
   select name
   from
@@ -276,17 +276,17 @@ def Create_vm_extension_dep():
   try:
     res = stackql.execute(query)
   except Exception as e:
-    print(f"Error in Create_vm_extension_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
+    print(f"Error in create_vm_extension_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {e}")
   else:
     if res[0]['name']: 
-      global Create_vm_extension_deployed
-      Create_vm_extension_deployed = True
+      global create_vm_extension_deployed
+      create_vm_extension_deployed = True
       print(res)
     else:
-      print(f"Error in Create_vm_extension_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {res}")
+      print(f"Error in create_vm_extension_dep for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm_name}: {res}")
 
-def Delete_OD_vm():
-# Delete from Virtual Machines
+def delete_OD_vm():
+  """Delete from Virtual Machines."""
   query = """
   Delete
     from azure.compute.virtual_machines
@@ -297,14 +297,14 @@ def Delete_OD_vm():
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
-    print(f"Error in Delete_OD_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
+    print(f"Error in delete_OD_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {e}")
   else:
-    if res['message'] == Success_message:
-      global Delete_OD_vm_ind
-      Delete_OD_vm_ind = True
+    if res['message'] == success_message:
+      global delete_OD_vm_ind
+      delete_OD_vm_ind = True
       print(res)
     else:
-      print(f"Error in Delete_OD_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")   
+      print(f"Error in delete_OD_vm for subscription_id = {subscription_id}, rg = {rg_name}, vmName = {vm['vm_name']}: {res}")   
 
 def process_for_each_rg():
   query = """
@@ -333,14 +333,14 @@ def process_for_each_rg():
     if not vms:
       print(f"No OD VMs to replace for Subscription_id = {subscription_id}, rg = {rg_name} ")
     else:
-      global vm, i,Create_nic_ind, Create_spot_vm_ind, Create_vm_extension_ind, Delete_OD_vm_ind
-      global Create_nic_deployed, Create_spot_vm_deployed, Create_vm_extension_deployed
+      global vm, i, create_nic_ind, create_spot_vm_ind, create_vm_extension_ind, delete_OD_vm_ind
+      global create_nic_deployed, create_spot_vm_deployed, create_vm_extension_deployed
 
       for i, vm in enumerate(vms):
 
         #Reset the flag for every iteration
-        Create_nic_ind, Create_spot_vm_ind, Create_vm_extension_ind, Delete_OD_vm_ind = False, False, False, False
-        Create_nic_deployed, Create_spot_vm_deployed, Create_vm_extension_deployed = False, False, False
+        create_nic_ind, create_spot_vm_ind, create_vm_extension_ind, delete_OD_vm_ind = False, False, False, False
+        create_nic_deployed, create_spot_vm_deployed, create_vm_extension_deployed = False, False, False
 
         #skip the last vm in the vmss so there is atleast one OD VM
         if i == len(vms) -1:
@@ -352,67 +352,67 @@ def process_for_each_rg():
         vm_name = vm['vmss_name'] + '-manual-' + vm['vm_name']
         nic_name = vm_name + '-nic'
 
-#1. Create nic
-        Create_nic()
+#1. create nic
+        create_nic()
         #if error continue to next iteration
-        if not Create_nic_ind:
+        if not create_nic_ind:
           continue
 
         for i in range(5):
           time.sleep(2)
-          Create_nic_dep()
-          if Create_nic_deployed:
+          create_nic_dep()
+          if create_nic_deployed:
             break
 
         #if not deployed continue to next iteration       
-        if not Create_nic_deployed:
+        if not create_nic_deployed:
           continue  
 
-#2. Create spot_vm 
-        Create_spot_vm()
+#2. create spot_vm 
+        create_spot_vm()
         #if error continue to next iteration
-        if not Create_spot_vm_ind:
-          Undo_create_nic()
+        if not create_spot_vm_ind:
+          undo_create_nic()
           continue
 
         for i in range(5):
           time.sleep(2)
-          Create_spot_vm_dep()
-          if Create_spot_vm_deployed:
+          create_spot_vm_dep()
+          if create_spot_vm_deployed:
             break
 
         #if not deployed continue to next iteration       
-        if not Create_spot_vm_deployed:
-          Undo_create_nic()
+        if not create_spot_vm_deployed:
+          undo_create_nic()
           continue  
 
-#3. Create vm_extension
-        Create_vm_extension()
+#3. create vm_extension
+        create_vm_extension()
         #if error continue to next iteration
-        if not Create_vm_extension_ind:
-          Undo_create_nic()
-          Undo_create_spot_vm()          
+        if not create_vm_extension_ind:
+          undo_create_nic()
+          undo_create_spot_vm()          
           continue
 
         for i in range(5):
           time.sleep(2)
-          Create_vm_extension_dep()
-          if Create_vm_extension_deployed:
+          create_vm_extension_dep()
+          if create_vm_extension_deployed:
             break
 
         #if not deployed continue to next iteration       
-        if not Create_vm_extension_deployed:
-          Undo_create_nic()
-          Undo_create_spot_vm()          
+        if not create_vm_extension_deployed:
+          undo_create_nic()
+          undo_create_spot_vm()          
           continue  
 
 #4. Delete OD VM
-        Delete_OD_vm()
+        delete_OD_vm()
         #if error continue to next iteration
-        if not Delete_OD_vm_ind:
-          Undo_create_nic()
-          Undo_create_spot_vm()  
-          Undo_create_vm_extension()        
+        if not delete_OD_vm_ind:
+          undo_create_nic()
+          undo_create_spot_vm()  
+          undo_create_vm_extension()        
 
 def get_resource_group():
   query = """
@@ -439,7 +439,7 @@ stackql = StackQL()
 stackql_query = "REGISTRY PULL azure"
 result = stackql.executeStmt(stackql_query)
 print(result)
-Success_message = 'The operation was despatched successfully\n'
+success_message = 'The operation was despatched successfully\n'
 
 subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
 convert_to_spot = os.environ["CONVERT_TO_SPOT"]
