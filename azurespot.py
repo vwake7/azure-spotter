@@ -457,8 +457,8 @@ match convert_to_spot:
     exit()
 
 # schedule the task to run every hour
-#schedule.every().hour.at(":01").do(get_resource_group) 
-schedule.every(10).minutes.do(get_resource_group) 
+schedule.every().hour.at(":01").do(get_resource_group) 
+#schedule.every(10).minutes.do(get_resource_group) 
 
 # run all jobs now
 #schedule.run_all()
