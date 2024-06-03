@@ -135,7 +135,7 @@ def create_spot_vm():
                 '$.osProfile.adminPassword',
                 'Spotvm123@Apr2024',
                 '$.networkProfile.networkInterfaces[0].id',
-                '/subscriptions/bb00d6d4-b2ad-4499-85c3-10a64432e0cf/resourceGroups/' || '%s' ||'/providers/Microsoft.Network/networkInterfaces/' || '%s',
+                '/subscriptions/' || '%s'|| '/resourceGroups/' || '%s' ||'/providers/Microsoft.Network/networkInterfaces/' || '%s',
                 '$.priority',
                 'Spot',
                 '$.evictionPolicy',
@@ -148,7 +148,7 @@ def create_spot_vm():
   where subscriptionId = '%s'
   and resourceGroupName = '%s'
   and vmName = '%s'
-  ;""" % (rg_name,subscription_id,vm_name,vm_name,vm_name.replace('_','-'),rg_name,nic_name,subscription_id,rg_name,vm['vm_name'])
+  ;""" % (rg_name,subscription_id,vm_name,vm_name,vm_name.replace('_','-'),subscription_id,rg_name,nic_name,subscription_id,rg_name,vm['vm_name'])
   try:
     res = stackql.executeStmt(query)
   except Exception as e:
